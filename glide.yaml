@@ -30,7 +30,10 @@ import:
 - package: github.com/decred/bitset
 - package: github.com/decred/blake256
 - package: github.com/decred/dcrrpcclient
+  version: abc326aeb97b299c7eb6b13b81353fc375e9b95d
+  repo: https://github.com/dnldd/dcrrpcclient.git
 - package: github.com/decred/dcrutil
+  version: 4ce0f41cf3f957fcdf3f0de049602ac834449b9c
   subpackages:
   - bloom
 - package: golang.org/x/crypto

@@ -802,57 +802,6 @@ func TestWalletSvrCmds(t *testing.T) {
 			},
 		},
 		{
-			name: "move",
-			newCmd: func() (interface{}, error) {
-				return dcrjson.NewCmd("move", "from", "to", 0.5)
-			},
-			staticCmd: func() interface{} {
-				return dcrjson.NewMoveCmd("from", "to", 0.5, nil, nil)
-			},
-			marshalled: `{"jsonrpc":"1.0","method":"move","params":["from","to",0.5],"id":1}`,
-			unmarshalled: &dcrjson.MoveCmd{
-				FromAccount: "from",
-				ToAccount:   "to",
-				Amount:      0.5,
-				MinConf:     dcrjson.Int(1),
-				Comment:     nil,
-			},
-		},
-		{
-			name: "move optional1",
-			newCmd: func() (interface{}, error) {
-				return dcrjson.NewCmd("move", "from", "to", 0.5, 6)
-			},
-			staticCmd: func() interface{} {
-				return dcrjson.NewMoveCmd("from", "to", 0.5, dcrjson.Int(6), nil)
-			},
-			marshalled: `{"jsonrpc":"1.0","method":"move","params":["from","to",0.5,6],"id":1}`,
-			unmarshalled: &dcrjson.MoveCmd{
-				FromAccount: "from",
-				ToAccount:   "to",
-				Amount:      0.5,
-				MinConf:     dcrjson.Int(6),
-				Comment:     nil,
-			},
-		},
-		{
-			name: "move optional2",
-			newCmd: func() (interface{}, error) {
-				return dcrjson.NewCmd("move", "from", "to", 0.5, 6, "comment")
-			},
-			staticCmd: func() interface{} {
-				return dcrjson.NewMoveCmd("from", "to", 0.5, dcrjson.Int(6), dcrjson.String("comment"))
-			},
-			marshalled: `{"jsonrpc":"1.0","method":"move","params":["from","to",0.5,6,"comment"],"id":1}`,
-			unmarshalled: &dcrjson.MoveCmd{
-				FromAccount: "from",
-				ToAccount:   "to",
-				Amount:      0.5,
-				MinConf:     dcrjson.Int(6),
-				Comment:     dcrjson.String("comment"),
-			},
-		},
-		{
 			name: "sendfrom",
 			newCmd: func() (interface{}, error) {
 				return dcrjson.NewCmd("sendfrom", "from", "1Address", 0.5)
@@ -1008,20 +957,6 @@ func TestWalletSvrCmds(t *testing.T) {
 				Amount:    0.5,
 				Comment:   dcrjson.String("comment"),
 				CommentTo: dcrjson.String("commentto"),
-			},
-		},
-		{
-			name: "setaccount",
-			newCmd: func() (interface{}, error) {
-				return dcrjson.NewCmd("setaccount", "1Address", "acct")
-			},
-			staticCmd: func() interface{} {
-				return dcrjson.NewSetAccountCmd("1Address", "acct")
-			},
-			marshalled: `{"jsonrpc":"1.0","method":"setaccount","params":["1Address","acct"],"id":1}`,
-			unmarshalled: &dcrjson.SetAccountCmd{
-				Address: "1Address",
-				Account: "acct",
 			},
 		},
 		{
