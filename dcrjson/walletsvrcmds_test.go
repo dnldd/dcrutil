@@ -91,19 +91,6 @@ func TestWalletSvrCmds(t *testing.T) {
 			},
 		},
 		{
-			name: "encryptwallet",
-			newCmd: func() (interface{}, error) {
-				return dcrjson.NewCmd("encryptwallet", "pass")
-			},
-			staticCmd: func() interface{} {
-				return dcrjson.NewEncryptWalletCmd("pass")
-			},
-			marshalled: `{"jsonrpc":"1.0","method":"encryptwallet","params":["pass"],"id":1}`,
-			unmarshalled: &dcrjson.EncryptWalletCmd{
-				Passphrase: "pass",
-			},
-		},
-		{
 			name: "estimatefee",
 			newCmd: func() (interface{}, error) {
 				return dcrjson.NewCmd("estimatefee", 6)
@@ -460,17 +447,6 @@ func TestWalletSvrCmds(t *testing.T) {
 			unmarshalled: &dcrjson.ListAccountsCmd{
 				MinConf: dcrjson.Int(6),
 			},
-		},
-		{
-			name: "listaddressgroupings",
-			newCmd: func() (interface{}, error) {
-				return dcrjson.NewCmd("listaddressgroupings")
-			},
-			staticCmd: func() interface{} {
-				return dcrjson.NewListAddressGroupingsCmd()
-			},
-			marshalled:   `{"jsonrpc":"1.0","method":"listaddressgroupings","params":[],"id":1}`,
-			unmarshalled: &dcrjson.ListAddressGroupingsCmd{},
 		},
 		{
 			name: "listlockunspent",
